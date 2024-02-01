@@ -2,8 +2,8 @@ import { Box, Container } from '@mui/material'
 
 function Home() {
   return (
-    <Container>
-      <Box sx={{ margin: '0 10rem 0 10rem', textAlign: 'left' }}>
+    <Container sx={{ margin: '0 10rem 0 10rem', textAlign: 'left' }}>
+      <Box>
         <p>
           Welcome, <br />
           My name is Staz. <br />
@@ -22,6 +22,13 @@ function Home() {
           I used to be a high-end mixologist at Michelin Rated restaurants, <br />
           and I used to own my own beach bar in Greece.
         </p>
+      </Box>
+      <Box sx={{ paddingTop: '5rem', textAlign: 'right' }}>
+        Feel free to try my GPT powered chat-bot.
+        <br />
+        It can answer questions about me, my work, and my hobbies.
+        <br />
+        It is still in beta running on a free server so bear with me. <br />
       </Box>
     </Container>
   )
