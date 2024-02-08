@@ -14,7 +14,7 @@ import { useGlobalContext } from '../contexts/globalContext'
 const Home = () => {
   const { responses } = useGlobalContext()
   return (
-    <Box padding={2} sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
+    <Box padding={4} margin={8} sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', maxHeight: '80vh' }}>
       <Typography variant="h6">
         {responses.map((text, index) => (
           <p key={index}>{text}</p>

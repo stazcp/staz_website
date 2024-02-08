@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { sendMessage, startConversation } from '../utils'
-import { Container, Input } from '@mui/material'
+import { Box, Input } from '@mui/material'
 import { useGlobalContext } from '../contexts/globalContext'
 import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
@@ -40,24 +40,27 @@ function ChatComponent() {
   }
 
   return (
-    <Container>
-      <Input
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        placeholder="Type your message here"
-        style={{ width: 390 }}
-      />
-      <LoadingButton
-        variant="contained"
-        onClick={handleSend}
-        style={{ backgroundColor: 'rgb(0,0,0,0.7)' }}
-        loading={isLoading}
-        loadingPosition="start"
-        className={classes.button}
-      >
-        <span>Send</span>
-      </LoadingButton>
-    </Container>
+    <Box>
+      <form onSubmit={handleSend} style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
+        <Input
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          placeholder="Type your message here"
+          style={{ width: '500px' }}
+        />
+        <LoadingButton
+          variant="contained"
+          onClick={handleSend}
+          style={{ backgroundColor: 'rgb(0,0,0,0.7)' }}
+          loading={isLoading}
+          loadingPosition="start"
+          className={classes.button}
+          type="submit"
+        >
+          <span>Send</span>
+        </LoadingButton>
+      </form>
+    </Box>
   )
 }
 
