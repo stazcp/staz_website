@@ -38,6 +38,12 @@ export const APP_THEME = {
       },
     },
   },
+  palette: {
+    primary: {
+      main: '#000000', // black
+      contrastText: '#ffffff', // black
+    },
+  },
 }
 
 export const GLOBAL_STYLES = {
