@@ -1,11 +1,6 @@
 import { Box, Typography } from '@mui/material'
-
-const paragraphs = [
-  'Welcome,',
-  'My name is Staz.',
-  'I am a Frontend (mostly) engineer and have been working with React and Typescript mainly.',
-  'I like to build things with AI, like this page for example uses GPT to generate the background image, as well as to power the chat bot where you can ask me questions about my work, hobbies, or anything else.',
-]
+import Chat from '../components/Chat'
+import { useGlobalContext } from '../contexts/globalContext'
 
 // make the whole page a chat-bot interface,
 // instead of chat bot in bottom corner
@@ -17,13 +12,15 @@ const paragraphs = [
 // asking about projects I can provide links as well
 
 const Home = () => {
+  const { responses } = useGlobalContext()
   return (
     <Box padding={2} sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
       <Typography variant="h6">
-        {paragraphs.map((text, index) => (
+        {responses.map((text, index) => (
           <p key={index}>{text}</p>
         ))}
       </Typography>
+      <Chat />
     </Box>
   )
 }

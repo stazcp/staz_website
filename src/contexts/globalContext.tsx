@@ -1,9 +1,12 @@
 import { ReactNode, createContext, useContext, useState } from 'react'
+import { INTRO_TEXT } from '../constants'
 
 // Define the shape of your context value
 interface GlobalContextValue {
   openLearnMoreModal: boolean
   setOpenLearnMoreModal: React.Dispatch<React.SetStateAction<boolean>>
+  responses: string[]
+  setResponses: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 // Create the context
@@ -20,9 +23,12 @@ export const useGlobalContext = () => {
 
 const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode => {
   const [openLearnMoreModal, setOpenLearnMoreModal] = useState(false)
+  const [responses, setResponses] = useState<string[]>(INTRO_TEXT)
 
   return (
-    <GlobalContext.Provider value={{ openLearnMoreModal, setOpenLearnMoreModal }}>
+    <GlobalContext.Provider
+      value={{ openLearnMoreModal, setOpenLearnMoreModal, responses, setResponses }}
+    >
       {children}
     </GlobalContext.Provider>
   )
