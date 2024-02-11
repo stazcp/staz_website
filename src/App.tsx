@@ -3,6 +3,7 @@ import BasicTabs from './components/BasicTabs'
 import GlobalContextProvider from './contexts/globalContext'
 import { APP_THEME, GLOBAL_STYLES } from './styles'
 import SocialBar from './components/SocialBar'
+import Chat from './components/Chat'
 
 function App() {
   const theme = createTheme(APP_THEME)
@@ -12,8 +13,9 @@ function App() {
     <GlobalContextProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyles styles={GLOBAL_STYLES} />
-        <Container>
+        <Container maxWidth={'lg'}>
           <BasicTabs />
+          <Chat />
         </Container>
         <SocialBar />
       </ThemeProvider>

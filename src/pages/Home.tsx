@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 import Chat from '../components/Chat'
 import { useGlobalContext } from '../contexts/globalContext'
 
@@ -14,14 +14,19 @@ import { useGlobalContext } from '../contexts/globalContext'
 const Home = () => {
   const { responses } = useGlobalContext()
   return (
-    <Box padding={4} margin={8} sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', maxHeight: '80vh' }}>
-      <Typography variant="h6">
-        {responses.map((text, index) => (
-          <p key={index}>{text}</p>
-        ))}
-      </Typography>
-      <Chat />
-    </Box>
+    <Container>
+      <Box
+        paddingBottom={8}
+        maxHeight={'50vh'}
+        sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', overflow: 'scroll' }}
+      >
+        <Typography variant="h6">
+          {responses.map((text, index) => (
+            <p key={index}>{text}</p>
+          ))}
+        </Typography>
+      </Box>
+    </Container>
   )
 }
 

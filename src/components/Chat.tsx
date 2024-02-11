@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { sendMessage, startConversation } from '../utils'
-import { Box, Input } from '@mui/material'
+import { Box, Container, Input } from '@mui/material'
 import { useGlobalContext } from '../contexts/globalContext'
 import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
@@ -29,6 +29,7 @@ function ChatComponent() {
 
   useEffect(() => {
     const init = async () => {
+      if (threadId) return
       const id = await startConversation()
       setThreadId(id)
     }
@@ -45,29 +46,31 @@ function ChatComponent() {
   }
 
   return (
-    <Box>
-      <form onSubmit={handleSend} style={{ display: 'flex', flexDirection: 'row', width: '100%' }}>
-        <Input
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Type your message here"
-          style={{ width: '500px' }}
-          className={classes.input}
-        />
-        <LoadingButton
-          variant="contained"
-          onClick={handleSend}
-          style={{ backgroundColor: 'rgb(0,0,0,0.7)' }}
-          loading={isLoading}
-          loadingPosition="start"
-          className={classes.button}
-          type="submit"
-          color="primary"
-        >
-          <span>Send</span>
-        </LoadingButton>
-      </form>
-    </Box>
+    <Container maxWidth={'md'}>
+      <Box position={'absolute'} bottom={75} width={'100%'}>
+        <form onSubmit={handleSend} style={{ display: 'flex', flexDirection: 'row' }}>
+          <Input
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            placeholder="Type your message here"
+            style={{ width: '80%' }}
+            className={classes.input}
+          />
+          <LoadingButton
+            variant="contained"
+            onClick={handleSend}
+            style={{ backgroundColor: 'rgb(0,0,0,0.7)', width: '10vw' }}
+            loading={isLoading}
+            loadingPosition="start"
+            className={classes.button}
+            type="submit"
+            color="primary"
+          >
+            <span>Send</span>
+          </LoadingButton>
+        </form>
+      </Box>
+    </Container>
   )
 }
 
