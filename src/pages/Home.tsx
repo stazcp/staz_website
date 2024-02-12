@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material'
-import Chat from '../components/Chat'
 import { useGlobalContext } from '../contexts/globalContext'
+import { createMarkup } from '../utils'
 
 // make the whole page a chat-bot interface,
 // instead of chat bot in bottom corner
@@ -12,18 +12,17 @@ import { useGlobalContext } from '../contexts/globalContext'
 // asking about projects I can provide links as well
 
 const Home = () => {
-  const { responses } = useGlobalContext()
+  const { response } = useGlobalContext()
+
   return (
     <Container>
       <Box
-        paddingBottom={8}
+        padding={4}
         maxHeight={'50vh'}
         sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', overflow: 'scroll' }}
       >
         <Typography variant="h6">
-          {responses.map((text, index) => (
-            <p key={index}>{text}</p>
-          ))}
+          <div dangerouslySetInnerHTML={createMarkup(response)} />
         </Typography>
       </Box>
     </Container>

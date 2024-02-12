@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify'
+
 export const startConversation = async () => {
   const response = await fetch('https://personal-chatbot-90zk.onrender.com/start')
   const data = await response.json()
@@ -16,4 +18,11 @@ export const sendMessage = async (threadId, message) => {
   const data = await response.json()
   console.log(data) // { response: 'chatbot_response_here' }
   return data.response
+}
+
+export const createMarkup = (html: string) => {
+  const cleanedHtml = html.replace(/```html|```/g, '')
+  return {
+    __html: DOMPurify.sanitize(cleanedHtml),
+  }
 }

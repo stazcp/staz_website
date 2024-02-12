@@ -24,36 +24,35 @@ function ChatComponent() {
   const [threadId, setThreadId] = useState('')
   const [userInput, setUserInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const { setResponses } = useGlobalContext()
+  const { setResponse } = useGlobalContext()
   const classes = useStyles()
 
   useEffect(() => {
-    const init = async () => {
+    ;(async () => {
       if (threadId) return
       const id = await startConversation()
       setThreadId(id)
-    }
-    init()
-  })
+    })()
+  }, [])
 
   const handleSend = async () => {
-    if (!threadId || !userInput) return
+    if (!userInput && !threadId) return
     setIsLoading(true)
     const response = await sendMessage(threadId, userInput)
     setIsLoading(false)
-    setResponses([response])
+    setResponse(response)
     setUserInput('') // Clear input after sending
   }
 
   return (
-    <Container maxWidth={'md'}>
+    <Container>
       <Box position={'absolute'} bottom={75} width={'100%'}>
         <form onSubmit={handleSend} style={{ display: 'flex', flexDirection: 'row' }}>
           <Input
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder="Type your message here"
-            style={{ width: '80%' }}
+            style={{ width: '80vw', paddingLeft: 4 }}
             className={classes.input}
           />
           <LoadingButton
