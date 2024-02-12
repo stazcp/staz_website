@@ -1,12 +1,13 @@
 import { ReactNode, createContext, useContext, useState } from 'react'
 import { INTRO_TEXT } from '../constants'
+import { cleanHTML } from '../utils'
 
 // Define the shape of your context value
 interface GlobalContextValue {
   openLearnMoreModal: boolean
   setOpenLearnMoreModal: React.Dispatch<React.SetStateAction<boolean>>
   response: string
-  setResponse: React.Dispatch<React.SetStateAction<string>>
+  setResponse: (newResponse: string) => void
 }
 
 // Create the context
@@ -23,7 +24,13 @@ export const useGlobalContext = () => {
 
 const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode => {
   const [openLearnMoreModal, setOpenLearnMoreModal] = useState(false)
-  const [response, setResponse] = useState<string>(INTRO_TEXT)
+  const [response, _setResponse] = useState<string>(INTRO_TEXT)
+
+  const setResponse = (newResponse: string) => {
+    const cleanResponse = cleanHTML(newResponse)
+    console.log(cleanResponse)
+    _setResponse(cleanResponse)
+  }
 
   return (
     <GlobalContext.Provider

@@ -1,21 +1,30 @@
-import { createMarkup } from '../utils'
+import { cleanHTML } from '../utils'
 
-describe('createMarkup', () => {
-  it('should sanitize and return the HTML as __html property', () => {
-    const html = '<script>alert("Hello, World!")</script>'
-    const expectedCleanedHtml = 'alert("Hello, World!")'
+describe('cleanHTML', () => {
+  it('should ```html and ``` from HTML and trim whitespace', () => {
+    const html = '```html <h1> TITLE </h1> ```'
+    const expectedCleanedHtml = '<h1> TITLE </h1>'
 
-    const result = createMarkup(html)
+    const result = cleanHTML(html)
 
-    expect(result.__html).toEqual(expectedCleanedHtml)
+    expect(result).toEqual(expectedCleanedHtml)
   })
 
-  it('should remove code blocks from the HTML', () => {
-    const html = 'Some text ```html <script>alert("Hello, World!")</script> ``` More text'
-    const expectedCleanedHtml = 'Some text  More text'
+  it('should not remove code blocks if not surrounded by triple backticks', () => {
+    const html = 'Some text <script>alert("Hello, World!")</script> More text'
+    const expectedCleanedHtml = 'Some text <script>alert("Hello, World!")</script> More text'
 
-    const result = createMarkup(html)
+    const result = cleanHTML(html)
 
-    expect(result.__html).toEqual(expectedCleanedHtml)
+    expect(result).toEqual(expectedCleanedHtml)
+  })
+
+  it('should remove 【0†source】if it exists', () => {
+    const html = '【0†source】'
+    const expectedCleanedHtml = ''
+
+    const result = cleanHTML(html)
+
+    expect(result).toEqual(expectedCleanedHtml)
   })
 })
