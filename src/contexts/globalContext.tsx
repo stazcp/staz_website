@@ -1,16 +1,8 @@
-import { ReactNode, createContext, useContext, useState } from 'react'
-import { INTRO_TEXT } from '../constants'
-import { cleanHTML } from '../utils'
+import { FormEvent, ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { keepServerAwake, postMessage, startConversation } from '../utils'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { GlobalContextValue, NewMessageMutationVariables } from './types'
 
-// Define the shape of your context value
-interface GlobalContextValue {
-  openLearnMoreModal: boolean
-  setOpenLearnMoreModal: React.Dispatch<React.SetStateAction<boolean>>
-  response: string
-  setResponse: (newResponse: string) => void
-}
-
-// Create the context
 const GlobalContext = createContext<GlobalContextValue | null>(null)
 
 // Create a custom hook to access the context
@@ -24,12 +16,39 @@ export const useGlobalContext = () => {
 
 const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode => {
   const [openLearnMoreModal, setOpenLearnMoreModal] = useState(false)
-  const [response, _setResponse] = useState<string>(INTRO_TEXT)
+  const [userInput, setUserInput] = useState('')
 
-  const setResponse = (newResponse: string) => {
-    const cleanResponse = cleanHTML(newResponse)
-    console.log(cleanResponse)
-    _setResponse(cleanResponse)
+  const {
+    isPending: serverConnectionPending,
+    error: serverConnectionError,
+    data: threadId,
+  } = useQuery({
+    queryKey: ['startConversation'],
+    queryFn: startConversation,
+  })
+
+  useQuery({
+    queryKey: ['keepServerAwake'],
+    queryFn: keepServerAwake,
+    refetchInterval: 49000,
+  })
+
+  const {
+    mutate: sendMessageMutation,
+    data: aiResponse,
+    error: aiResponseError,
+    isPending: aiResponsePending,
+  } = useMutation({
+    mutationKey: ['sendMessage'],
+    mutationFn: ({ threadId, userInput }: NewMessageMutationVariables) =>
+      postMessage(threadId, userInput),
+  })
+
+  const _sendMessage = (event: FormEvent): void => {
+    event.preventDefault()
+    if (!threadId && !userInput) return
+    sendMessageMutation({ threadId, userInput })
+    setUserInput('')
   }
 
   return (
@@ -37,8 +56,15 @@ const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode
       value={{
         openLearnMoreModal,
         setOpenLearnMoreModal,
-        response,
-        setResponse,
+        serverConnectionPending,
+        serverConnectionError,
+        threadId,
+        sendMessage: _sendMessage,
+        setUserInput,
+        userInput,
+        aiResponse,
+        aiResponsePending,
+        aiResponseError,
       }}
     >
       {children}
