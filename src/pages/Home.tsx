@@ -23,7 +23,7 @@ const Home = () => {
       maxHeight={'50vh'}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', overflow: 'scroll' }}
     >
-      <Typography variant="h6">
+      <Typography variant="h6" component="div">
         <div dangerouslySetInnerHTML={createMarkup(cleanResponse)} />
       </Typography>
     </Box>
