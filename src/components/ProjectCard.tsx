@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useGlobalContext } from '../contexts/globalContext'
+import { useGlobalContext } from '../contexts/GlobalContext'
 
 interface Props {
   img: string

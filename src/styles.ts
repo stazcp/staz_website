@@ -16,17 +16,20 @@ export const APP_THEME = {
     ].join(','),
     h1: {
       color: '#ffffff', // white text
-      backgroundColor: '#000000', // black background
       padding: '10px', // space around the text
-      borderRadius: '5px', // rounded corners
+      fontSize: '24px', // smaller font size
     },
     h2: {
       color: '#ffffff', // white text
-      backgroundColor: '#000000', // black background
       padding: '10px', // space around the text
-      borderRadius: '5px', // rounded corners
+      fontSize: '20px', // smaller font size
     },
-    // Add similar styles for other typography variants (h3, h4, h5, h6, body1, body2, etc.) if needed
+    h6: {
+      color: '#ffffff', // white text
+      padding: '10px', // space around the text
+      fontSize: '16px', // smaller font size
+    },
+    // Add similar styles for other typography variants (h3, h4, h5, body1, body2, etc.) if needed
   },
   components: {
     MuiListItem: {

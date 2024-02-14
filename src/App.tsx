@@ -1,6 +1,6 @@
 import { Container, ThemeProvider, createTheme, GlobalStyles } from '@mui/material'
 import BasicTabs from './components/BasicTabs'
-import GlobalContextProvider from './contexts/globalContext'
+import GlobalContextProvider from './contexts/GlobalContext'
 import { APP_THEME, GLOBAL_STYLES } from './styles'
 import SocialBar from './components/SocialBar'
 import Chat from './components/Chat'

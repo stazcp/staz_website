@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, createContext, useContext, useEffect, useState } from 'react'
+import { FormEvent, ReactNode, createContext, useContext, useState } from 'react'
 import { keepServerAwake, postMessage, startConversation } from '../utils'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { GlobalContextValue, NewMessageMutationVariables } from './types'
@@ -38,6 +38,7 @@ const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode
     data: aiResponse,
     error: aiResponseError,
     isPending: aiResponsePending,
+    isIdle: chatNeverUsed,
   } = useMutation({
     mutationKey: ['sendMessage'],
     mutationFn: ({ threadId, userInput }: NewMessageMutationVariables) =>
@@ -65,6 +66,7 @@ const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode
         aiResponse,
         aiResponsePending,
         aiResponseError,
+        chatNeverUsed,
       }}
     >
       {children}

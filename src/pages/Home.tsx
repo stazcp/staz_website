@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useGlobalContext } from '../contexts/globalContext'
 import { cleanHTML, createMarkup } from '../utils'
 import { INTRO_TEXT } from '../constants'
@@ -13,9 +13,30 @@ import { INTRO_TEXT } from '../constants'
 // asking about projects I can provide links as well
 
 const Home = () => {
-  const { aiResponse } = useGlobalContext()
+  const { aiResponse, chatNeverUsed, serverConnectionError, aiResponseError, aiResponsePending } =
+    useGlobalContext()
 
-  const cleanResponse = cleanHTML(aiResponse ?? INTRO_TEXT)
+  const cleanResponse = aiResponse ? cleanHTML(aiResponse) : null
+
+  const strategies = [
+    { condition: () => chatNeverUsed, action: () => INTRO_TEXT },
+    { condition: () => cleanResponse, action: () => cleanResponse },
+    { condition: () => aiResponsePending, action: () => 'Loading...' },
+    {
+      condition: () => serverConnectionError,
+      action: () => 'There was an error connecting to the server. Please try again later.',
+    },
+    {
+      condition: () => aiResponseError,
+      action: () => 'There was an error with the chat bot. Please try again later.',
+    },
+    { condition: () => true, action: () => INTRO_TEXT },
+  ]
+
+  const textToDisplay = () => {
+    const strategy = strategies.find((s) => s.condition())
+    return strategy ? createMarkup(strategy.action() || '') : { __html: '' }
+  }
 
   return (
     <Box
@@ -24,7 +45,7 @@ const Home = () => {
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">
-        <div dangerouslySetInnerHTML={createMarkup(cleanResponse)} />
+        <div dangerouslySetInnerHTML={textToDisplay()} />
       </Typography>
     </Box>
   )

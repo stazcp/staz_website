@@ -1,5 +1,5 @@
 import { Box, Container, Input } from '@mui/material'
-import { useGlobalContext } from '../contexts/globalContext'
+import { useGlobalContext } from '../contexts/GlobalContext'
 import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
 

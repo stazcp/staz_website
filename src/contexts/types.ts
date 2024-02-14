@@ -10,6 +10,7 @@ export interface GlobalContextValue {
   aiResponsePending: boolean
   aiResponseError: unknown
   aiResponse: string | undefined
+  chatNeverUsed: boolean
 }
 
 export interface NewMessageMutationVariables {
