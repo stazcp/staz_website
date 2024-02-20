@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
-import { useGlobalContext } from '../contexts/globalContext'
 import { cleanHTML, createMarkup } from '../utils'
 import { INTRO_TEXT } from '../constants'
+import useChat from '../hooks/use-chat'
 
 // make the whole page a chat-bot interface,
 // instead of chat bot in bottom corner
@@ -13,14 +13,10 @@ import { INTRO_TEXT } from '../constants'
 // asking about projects I can provide links as well
 
 const Home = () => {
-  const { aiResponse, chatNeverUsed, serverConnectionError, aiResponseError, aiResponsePending } =
-    useGlobalContext()
-
-  const cleanResponse = aiResponse ? cleanHTML(aiResponse) : null
+  const { aiResponse, serverConnectionError, aiResponseError, aiResponsePending } = useChat()
 
   const strategies = [
-    { condition: () => chatNeverUsed, action: () => INTRO_TEXT },
-    { condition: () => cleanResponse, action: () => cleanResponse },
+    { condition: () => aiResponse, action: () => cleanHTML(aiResponse) },
     { condition: () => aiResponsePending, action: () => 'Loading...' },
     {
       condition: () => serverConnectionError,
@@ -42,6 +38,7 @@ const Home = () => {
     <Box
       padding={4}
       maxHeight={'50vh'}
+      minHeight={300}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.25)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">

@@ -1,7 +1,9 @@
-import { FormEvent, ReactNode, createContext, useContext, useState } from 'react'
-import { keepServerAwake, postMessage, startConversation } from '../utils'
-import { useQuery, useMutation } from '@tanstack/react-query'
-import { GlobalContextValue, NewMessageMutationVariables } from './types'
+import { ReactNode, createContext, useContext, useState } from 'react'
+
+interface GlobalContextValue {
+  openLearnMoreModal: boolean
+  setOpenLearnMoreModal: (open: boolean) => void
+}
 
 const GlobalContext = createContext<GlobalContextValue | null>(null)
 
@@ -16,57 +18,12 @@ export const useGlobalContext = () => {
 
 const GlobalContextProvider = ({ children }: { children: ReactNode }): ReactNode => {
   const [openLearnMoreModal, setOpenLearnMoreModal] = useState(false)
-  const [userInput, setUserInput] = useState('')
-
-  const {
-    isPending: serverConnectionPending,
-    error: serverConnectionError,
-    data: threadId,
-  } = useQuery({
-    queryKey: ['startConversation'],
-    queryFn: startConversation,
-  })
-
-  useQuery({
-    queryKey: ['keepServerAwake'],
-    queryFn: keepServerAwake,
-    refetchInterval: 49000,
-  })
-
-  const {
-    mutate: sendMessageMutation,
-    data: aiResponse,
-    error: aiResponseError,
-    isPending: aiResponsePending,
-    isIdle: chatNeverUsed,
-  } = useMutation({
-    mutationKey: ['sendMessage'],
-    mutationFn: ({ threadId, userInput }: NewMessageMutationVariables) =>
-      postMessage(threadId, userInput),
-  })
-
-  const _sendMessage = (event: FormEvent): void => {
-    event.preventDefault()
-    if (!threadId && !userInput) return
-    sendMessageMutation({ threadId, userInput })
-    setUserInput('')
-  }
 
   return (
     <GlobalContext.Provider
       value={{
         openLearnMoreModal,
         setOpenLearnMoreModal,
-        serverConnectionPending,
-        serverConnectionError,
-        threadId,
-        sendMessage: _sendMessage,
-        setUserInput,
-        userInput,
-        aiResponse,
-        aiResponsePending,
-        aiResponseError,
-        chatNeverUsed,
       }}
     >
       {children}
