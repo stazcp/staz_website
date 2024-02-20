@@ -43,7 +43,7 @@ function ChatComponent() {
   }
 
   return (
-    <Box position={'absolute'} bottom={75} width={'100%'} marginLeft={4} marginRight={4}>
+    <Box position={'absolute'} bottom={75} width={'100%'} marginLeft={5} marginRight={5}>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'row' }}>
         <Input
           value={userInput}

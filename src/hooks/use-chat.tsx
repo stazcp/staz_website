@@ -29,7 +29,7 @@ const useChat = () => {
     isPending: aiResponsePending,
   } = useMutation<string, string>({
     mutationKey: SEND_MESSAGE,
-    mutationFn: (userInput) => sendMessageToServer(threadId, userInput), // Add type assertion to threadId
+    mutationFn: (userInput) => sendMessageToServer(threadId!, userInput!),
     onSuccess: (data) => setAiResponse(data),
   })
 

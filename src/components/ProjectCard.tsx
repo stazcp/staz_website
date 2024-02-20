@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useGlobalContext } from '../contexts/GlobalContext'
+// import { useGlobalContext } from '../contexts/GlobalContext'
 
 interface Props {
   img: string
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function MediaCard({ img, title, url, description, github }: Props) {
-  const { setOpenLearnMoreModal } = useGlobalContext()
+  // const { setOpenLearnMoreModal } = useGlobalContext()
 
   return (
     <Card sx={{ maxWidth: 345 }}>
