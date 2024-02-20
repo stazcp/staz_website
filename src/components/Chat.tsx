@@ -1,7 +1,8 @@
-import { Box, Container, Input } from '@mui/material'
-import { useGlobalContext } from '../contexts/GlobalContext'
+import { Box, Input } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
+import { useState, FormEvent } from 'react'
+import useChat from '../hooks/use-chat'
 
 const useStyles = makeStyles({
   button: {
@@ -19,29 +20,35 @@ const useStyles = makeStyles({
 })
 
 function ChatComponent() {
-  const {
-    serverConnectionPending,
-    serverConnectionError,
-    setUserInput,
-    userInput,
-    aiResponsePending,
-    sendMessage,
-  } = useGlobalContext()
+  const [userInput, setUserInput] = useState('')
+
+  const { serverConnectionPending, serverConnectionError, sendMessage, aiResponsePending } =
+    useChat()
 
   const classes = useStyles()
 
   const formDisabled = serverConnectionPending || !!serverConnectionError
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    if (formDisabled || !userInput) return
+    sendMessage(userInput)
+    setUserInput('')
+  }
+
+  const renderPlaceholder = () => {
+    if (serverConnectionPending) return 'Initializing...'
+    if (serverConnectionError) return 'Error initializing chat'
+    return 'Type your message here'
+  }
+
   return (
     <Box position={'absolute'} bottom={75} width={'100%'} marginLeft={4} marginRight={4}>
-      <form
-        onSubmit={formDisabled ? (e) => e.preventDefault() : sendMessage}
-        style={{ display: 'flex', flexDirection: 'row' }}
-      >
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'row' }}>
         <Input
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder={serverConnectionPending ? 'Initializing...' : 'Type your message here'}
+          placeholder={renderPlaceholder()}
           style={{ width: '80vw', paddingLeft: 4 }}
           className={classes.input}
           disabled={formDisabled}
