@@ -1,36 +1,39 @@
 import mountains from './assets/mountains.jpeg'
 
-export const APP_THEME = {
-  typography: {
-    fontFamily: [
-      '"Press Start 2P"',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    h1: {
-      color: '#ffffff', // white text
-      padding: '10px', // space around the text
-      fontSize: '24px', // smaller font size
-    },
-    h2: {
-      color: '#ffffff', // white text
-      padding: '10px', // space around the text
-      fontSize: '20px', // smaller font size
-    },
-    h6: {
-      color: '#ffffff', // white text
-      padding: '10px', // space around the text
-      fontSize: '16px', // smaller font size
-    },
-    // Add similar styles for other typography variants (h3, h4, h5, body1, body2, etc.) if needed
+const textStyles = {
+  color: '#ffffff', // white text
+  fontSize: '12px',
+  textShadow:
+    '2px 0 0 rgba(0, 0, 0, 1), -2px 0 0 rgba(0, 0, 0, 1), 0 2px 0 rgba(0, 0, 0, 1), 0 -2px 0 rgba(0, 0, 0, 1)',
+}
+
+const typographyStyles = {
+  fontFamily: [
+    '"Press Start 2P"',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    '"Helvetica Neue"',
+    'Arial',
+    'sans-serif',
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(','),
+  h1: { ...textStyles, fontSize: '24px' },
+  h2: { ...textStyles, fontSize: '20px' },
+  h6: { ...textStyles, fontSize: '16px' },
+  p: { ...textStyles },
+  body1: { ...textStyles, fontSize: '14px' },
+  body2: { ...textStyles },
+  ul: {
+    margin: 0,
+    padding: 0,
   },
+}
+
+export const APP_THEME = {
+  typography: typographyStyles,
   components: {
     MuiListItem: {
       styleOverrides: {
@@ -44,23 +47,16 @@ export const APP_THEME = {
   palette: {
     primary: {
       main: '#000000', // black
-      contrastText: '#ffffff', // black
+      contrastText: '#ffffff', // white
     },
   },
 }
 
 export const GLOBAL_STYLES = {
-  ul: {
-    margin: 0,
-    padding: 0,
-  },
+  ...APP_THEME.typography,
   body: {
     backgroundImage: `url(${mountains})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-  },
-  p: {
-    textShadow:
-      '2px 0 0 rgba(0, 0, 0, 1), -2px 0 0 rgba(0, 0, 0, 1), 0 2px 0 rgba(0, 0, 0, 1), 0 -2px 0 rgba(0, 0, 0, 1)',
   },
 }

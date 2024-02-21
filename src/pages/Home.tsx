@@ -37,12 +37,9 @@ const Home = () => {
   return (
     <Box
       padding={4}
-      maxHeight={'50vh'}
       minHeight={300}
-      position={'absolute'}
-      top={0}
-      margin={5}
-      sx={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', overflow: 'scroll' }}
+      marginBottom={2}
+      sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">
         <div dangerouslySetInnerHTML={textToDisplay()} />
