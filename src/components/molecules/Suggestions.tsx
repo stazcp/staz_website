@@ -1,5 +1,5 @@
 import { SuggestionBox } from 'components/atoms'
-import { suggestions } from '@constants'
+import { suggestions } from 'utils'
 import { Box } from '@mui/material'
 import { shuffle } from 'lodash'
 import { useState } from 'react'

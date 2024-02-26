@@ -1,10 +1,10 @@
-import mountains from './assets/mountains.jpeg'
+import mountains from 'assets/mountains.jpeg'
 
 const textStyles = {
   color: '#ffffff', // white text
-  fontSize: '12px',
+  fontSize: '1rem',
   textShadow:
-    '2px 0 0 rgba(0, 0, 0, 1), -2px 0 0 rgba(0, 0, 0, 1), 0 2px 0 rgba(0, 0, 0, 1), 0 -2px 0 rgba(0, 0, 0, 1)',
+    '0.0625rem 0 0 rgba(0, 0, 0, 1), -0.0625rem 0 0 rgba(0, 0, 0, 1), 0 0.125rem 0 rgba(0, 0, 0, 1), 0 -0.125rem 0 rgba(0, 0, 0, 1)',
 }
 
 const typographyStyles = {
@@ -20,11 +20,11 @@ const typographyStyles = {
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
   ].join(','),
-  h1: { ...textStyles, fontSize: '24px' },
-  h2: { ...textStyles, fontSize: '20px' },
-  h6: { ...textStyles, fontSize: '16px' },
+  h1: { ...textStyles, fontSize: '1.5rem' },
+  h2: { ...textStyles, fontSize: '1.25rem' },
+  h6: { ...textStyles, fontSize: '1rem' },
   p: { ...textStyles },
-  body1: { ...textStyles, fontSize: '14px' },
+  body1: { ...textStyles, fontSize: '1rem' },
   body2: { ...textStyles },
   ul: {
     margin: 0,
