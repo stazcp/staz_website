@@ -3,6 +3,9 @@ import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
 import { useState, FormEvent } from 'react'
 import useChat from '../hooks/use-chat'
+import { isMobile } from 'utils'
+import SendIcon from '@mui/icons-material/Send'
+import { useWindowSize } from 'hooks'
 
 const useStyles = makeStyles({
   button: {
@@ -21,6 +24,7 @@ const useStyles = makeStyles({
 
 function ChatComponent() {
   const [userInput, setUserInput] = useState('')
+  const { width } = useWindowSize()
 
   const { serverConnectionPending, serverConnectionError, sendMessage, aiResponsePending } =
     useChat()
@@ -38,18 +42,18 @@ function ChatComponent() {
 
   const renderPlaceholder = () => {
     if (serverConnectionPending) return 'Initializing...'
-    if (serverConnectionError) return 'Error initializing chat'
-    return 'Type your message here'
+    if (serverConnectionError) return isMobile(width) ? 'Error' : 'Error initializing chat'
+    return isMobile(width) ? 'Ask a question' : 'Type your message here'
   }
 
   return (
-    <Box width={'100%'} marginLeft={5} marginRight={5} marginTop={2}>
+    <Box width={'100%'} marginTop={3}>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'row' }}>
         <Input
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
           placeholder={renderPlaceholder()}
-          style={{ width: '80vw', paddingLeft: 4 }}
+          style={{ width: '100%', paddingLeft: 4 }}
           className={classes.input}
           disabled={formDisabled}
         />
@@ -63,7 +67,7 @@ function ChatComponent() {
           color="primary"
           disabled={formDisabled}
         >
-          <span>Send</span>
+          {isMobile(width) ? <SendIcon /> : <span>Send</span>}
         </LoadingButton>
       </form>
     </Box>

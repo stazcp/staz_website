@@ -15,8 +15,6 @@ interface Props {
 }
 
 export default function MediaCard({ img, title, url, description, github }: Props) {
-  // const { setOpenLearnMoreModal } = useGlobalContext()
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia sx={{ height: 140, paddingTop: '5rem' }} image={img} title={title} />

@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
-import { cleanHTML, createMarkup, INTRO_TEXT } from 'utils'
+import { cleanHTML, createMarkup, INTRO_TEXT, isMobile } from 'utils'
 import useChat from '../hooks/use-chat'
+import { useWindowSize } from 'hooks'
 
 // make the whole page a chat-bot interface,
 // instead of chat bot in bottom corner
@@ -13,10 +14,10 @@ import useChat from '../hooks/use-chat'
 
 const TextOutput = () => {
   const { aiResponse, serverConnectionError, aiResponseError, aiResponsePending } = useChat()
-
-  console.log(aiResponseError)
+  const { width } = useWindowSize()
 
   const strategies = [
+    { condition: () => aiResponsePending, action: () => 'Loading...' },
     {
       condition: () => aiResponseError,
       action: () =>
@@ -27,7 +28,6 @@ const TextOutput = () => {
       action: () => 'There was an error connecting to the server. Please try again later.',
     },
     { condition: () => aiResponse, action: () => cleanHTML(aiResponse) },
-    { condition: () => aiResponsePending, action: () => 'Loading...' },
     { condition: () => true, action: () => INTRO_TEXT },
   ]
 
@@ -39,7 +39,7 @@ const TextOutput = () => {
   return (
     <Box
       padding={4}
-      minHeight={300}
+      minHeight={isMobile(width) ? '50%' : 300}
       marginBottom={2}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >

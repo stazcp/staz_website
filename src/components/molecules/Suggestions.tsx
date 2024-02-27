@@ -28,9 +28,10 @@ const Suggestions = () => {
     <Box
       flexDirection={'row'}
       display={'flex'}
-      height={50}
+      height={77}
       width={'100%'}
       justifyContent={'space-evenly'}
+      alignItems={'center'}
     >
       <KeyboardArrowLeftIcon onClick={handleLeftArrow} style={{ cursor: 'pointer' }} />
       {selectedSuggestions.map(({ id, text }) => (

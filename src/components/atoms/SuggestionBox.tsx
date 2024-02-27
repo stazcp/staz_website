@@ -15,19 +15,22 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
 
   return (
     <Box
-      onClick={handleClick}
       key={key}
+      component="div" // Add the component prop with the value of 'div'
       display={'flex'}
       width={'80vw'}
       justifyContent={'center'}
       marginBottom={2}
+      marginLeft={2}
+      marginRight={2}
       alignItems={'center'}
       sx={{ cursor: 'pointer' }}
+      height={50}
+      padding={2}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      overflow={'scroll'}
     >
-      <Typography
-        variant="body2"
-        sx={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', overflow: 'scroll', padding: 2 }}
-      >
+      <Typography variant="body2" onClick={handleClick}>
         {suggestion}
       </Typography>
     </Box>

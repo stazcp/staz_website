@@ -16,7 +16,7 @@ function App() {
         <GlobalStyles styles={GLOBAL_STYLES} />
         <Home />
       </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   )
 }
