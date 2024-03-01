@@ -24,20 +24,22 @@ const Suggestions = () => {
     setCurrentIndex(newIndex)
   }
 
+  const arrowStyles = { cursor: 'pointer', color: 'white', fontSize: 40 }
+
   return (
     <Box
       flexDirection={'row'}
       display={'flex'}
       height={77}
-      width={'100%'}
+      width={'80vw'}
       justifyContent={'space-evenly'}
       alignItems={'center'}
     >
-      <KeyboardArrowLeftIcon onClick={handleLeftArrow} style={{ cursor: 'pointer' }} />
+      <KeyboardArrowLeftIcon onClick={handleLeftArrow} style={arrowStyles} />
       {selectedSuggestions.map(({ id, text }) => (
         <SuggestionBox key={id} suggestion={text} />
       ))}
-      <KeyboardArrowRightIcon onClick={handleRightArrow} style={{ cursor: 'pointer' }} />
+      <KeyboardArrowRightIcon onClick={handleRightArrow} style={arrowStyles} />
     </Box>
   )
 }

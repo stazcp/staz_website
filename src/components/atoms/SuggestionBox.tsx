@@ -16,9 +16,9 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
   return (
     <Box
       key={key}
-      component="div" // Add the component prop with the value of 'div'
+      component="div"
       display={'flex'}
-      width={'80vw'}
+      width={'60vw'}
       justifyContent={'center'}
       marginBottom={2}
       marginLeft={2}

@@ -7,31 +7,22 @@ export default function Home() {
   const { width } = useWindowSize()
 
   return (
-    <>
-      <Container
-        sx={{
-          height: '95vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          marginTop: 2,
-          marginBottom: 2,
-        }}
-      >
-        <TextOutput />
-      </Container>
-      <Box
-        position={'fixed'}
-        bottom={0}
-        left={'50%'}
-        height={150}
-        sx={{ transform: 'translateX(-50%)' }}
-        width={'90vw'}
-      >
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between', // Distribute space between items
+        minHeight: '100vh', // Make the container at least as tall as the viewport
+        boxSizing: 'border-box',
+        padding: 2,
+        marginTop: 2,
+      }}
+    >
+      <TextOutput />
+      <Box height={150} width={'90vw'} boxSizing={'border-box'} marginBottom={4}>
         <Suggestions />
         <Chat />
       </Box>
-    </>
+    </Container>
   )
 }

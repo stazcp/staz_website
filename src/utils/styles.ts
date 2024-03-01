@@ -55,8 +55,15 @@ export const APP_THEME = {
 export const GLOBAL_STYLES = {
   ...APP_THEME.typography,
   body: {
+    boxSizing: 'border-box',
     backgroundImage: `url(${mountains})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    backgroundPosition: 'center center',
+    height: '100vh',
+    width: '100vw',
+    margin: 0,
+    padding: 0,
+    overflow: 'hidden',
   },
 }

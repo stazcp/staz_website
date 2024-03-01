@@ -41,6 +41,7 @@ const TextOutput = () => {
       padding={4}
       minHeight={isMobile(width) ? '50%' : 300}
       marginBottom={2}
+      maxHeight={'60vh'}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">
