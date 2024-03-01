@@ -1,13 +1,15 @@
 import { Box, Typography } from '@mui/material'
+import { useWindowSize } from 'hooks'
 import useChat from 'hooks/use-chat'
+import { isMobile } from 'utils'
 
 interface SuggestionProps {
   suggestion: string
-  key: number
 }
 
-const Suggestion = ({ key, suggestion }: SuggestionProps) => {
+const Suggestion = ({ suggestion }: SuggestionProps) => {
   const { sendMessage } = useChat()
+  const { width } = useWindowSize()
 
   const handleClick = () => {
     sendMessage(suggestion)
@@ -15,7 +17,6 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
 
   return (
     <Box
-      key={key}
       component="div"
       display={'flex'}
       justifyContent={'center'}
@@ -24,8 +25,9 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
       marginRight={2}
       alignItems={'center'}
       sx={{ cursor: 'pointer' }}
-      height={'100%'}
+      height={isMobile(width) ? 120 : 50}
       padding={2}
+      width={isMobile(width) ? '60vw' : '70vw'}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >
       <div style={{ maxHeight: '100%', overflow: 'auto' }}>

@@ -41,9 +41,8 @@ const TextOutput = () => {
   return (
     <Box
       padding={4}
-      minHeight={isMobile(width) ? '50%' : 300}
       marginBottom={2}
-      maxHeight={tooShort ? '50vh' : '55vh'}
+      maxHeight={tooShort ? '50vh' : '60vh'}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">

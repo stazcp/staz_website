@@ -61,7 +61,7 @@ function ChatComponent() {
           variant="contained"
           style={{ backgroundColor: 'rgb(0,0,0,0.7)', width: '10vw' }}
           loading={aiResponsePending}
-          loadingPosition="start"
+          // loadingPosition="start"
           className={classes.button}
           type="submit"
           color="primary"
