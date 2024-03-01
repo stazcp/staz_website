@@ -1,16 +1,18 @@
 import { SuggestionBox } from 'components/atoms'
-import { suggestions } from 'utils'
+import { isMobile, suggestions } from 'utils'
 import { Box } from '@mui/material'
 import { shuffle } from 'lodash'
 import { useState } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
+import { useWindowSize } from 'hooks'
 
 const shuffledSuggestions = shuffle(suggestions)
 
 const Suggestions = () => {
   const [selectedSuggestions, setSelectedSuggestions] = useState([shuffledSuggestions[0]])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { width } = useWindowSize()
 
   const handleLeftArrow = () => {
     const newIndex = (currentIndex - 1 + shuffledSuggestions.length) % shuffledSuggestions.length
@@ -30,8 +32,7 @@ const Suggestions = () => {
     <Box
       flexDirection={'row'}
       display={'flex'}
-      height={77}
-      width={'80vw'}
+      height={isMobile(width) ? 120 : 77}
       justifyContent={'space-evenly'}
       alignItems={'center'}
     >

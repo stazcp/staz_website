@@ -24,7 +24,7 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
       marginRight={2}
       alignItems={'center'}
       sx={{ cursor: 'pointer' }}
-      height={48}
+      height={'100%'}
       padding={2}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >

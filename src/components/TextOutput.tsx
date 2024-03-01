@@ -14,7 +14,7 @@ import { useWindowSize } from 'hooks'
 
 const TextOutput = () => {
   const { aiResponse, serverConnectionError, aiResponseError, aiResponsePending } = useChat()
-  const { width } = useWindowSize()
+  const { width, height } = useWindowSize()
 
   const strategies = [
     { condition: () => aiResponsePending, action: () => 'Loading...' },
@@ -36,12 +36,14 @@ const TextOutput = () => {
     return strategy ? createMarkup(strategy.action() || '') : { __html: '' }
   }
 
+  const tooShort = height < 700
+
   return (
     <Box
       padding={4}
       minHeight={isMobile(width) ? '50%' : 300}
       marginBottom={2}
-      maxHeight={'60vh'}
+      maxHeight={tooShort ? '50vh' : '55vh'}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">

@@ -21,8 +21,8 @@ export default function Home() {
     >
       <TextOutput />
       <Box
-        height={150}
-        width={'90vw'}
+        height={isMobile(width) ? 200 : 150}
+        width={isMobile(width) ? '95vw' : '90vw'}
         display={'flex'}
         flexDirection={'column'}
         marginBottom={4}
