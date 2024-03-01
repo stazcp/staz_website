@@ -11,15 +11,23 @@ export default function Home() {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between', // Distribute space between items
-        minHeight: '100vh', // Make the container at least as tall as the viewport
+        justifyContent: 'space-between',
+        minHeight: '100vh',
         boxSizing: 'border-box',
         padding: 2,
         marginTop: 2,
+        alignItems: 'center',
       }}
     >
       <TextOutput />
-      <Box height={150} width={'90vw'} boxSizing={'border-box'} marginBottom={4}>
+      <Box
+        height={150}
+        width={'90vw'}
+        display={'flex'}
+        flexDirection={'column'}
+        marginBottom={4}
+        alignItems={'center'}
+      >
         <Suggestions />
         <Chat />
       </Box>

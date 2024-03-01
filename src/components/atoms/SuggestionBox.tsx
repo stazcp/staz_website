@@ -18,21 +18,21 @@ const Suggestion = ({ key, suggestion }: SuggestionProps) => {
       key={key}
       component="div"
       display={'flex'}
-      width={'60vw'}
       justifyContent={'center'}
       marginBottom={2}
       marginLeft={2}
       marginRight={2}
       alignItems={'center'}
       sx={{ cursor: 'pointer' }}
-      height={50}
+      height={48}
       padding={2}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      overflow={'scroll'}
     >
-      <Typography variant="body2" onClick={handleClick}>
-        {suggestion}
-      </Typography>
+      <div style={{ maxHeight: '100%', overflow: 'auto' }}>
+        <Typography variant="body2" onClick={handleClick}>
+          {suggestion}
+        </Typography>
+      </div>
     </Box>
   )
 }
