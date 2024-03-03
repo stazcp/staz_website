@@ -1,24 +1,18 @@
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useAtom } from 'jotai'
 import {
-  aiResponseAtom,
   aiResponseErrorAtom,
   aiResponsePendingAtom,
   questionCountAtom,
+  aiResponseWithCountAtom,
 } from '@store/chat-state'
 import { keepServerAwake, startConversation, sendMessageToServer, ErrorType } from 'utils'
-import { useEffect } from 'react'
 
 const useChat = () => {
-  const [aiResponse, setAiResponse] = useAtom(aiResponseAtom)
+  const [aiResponse, setAiResponse] = useAtom(aiResponseWithCountAtom)
   const [aiResponsePending, setAiResponsePendingAtom] = useAtom(aiResponsePendingAtom)
   const [aiResponseError, setAiResponseErrorAtom] = useAtom(aiResponseErrorAtom)
-  const [questionCount, setQuestionCount]: [number, (val: number) => void] =
-    useAtom(questionCountAtom)
-
-  useEffect(() => {
-    localStorage.setItem('questionCount', questionCount.toString())
-  }, [questionCount])
+  const [questionCount] = useAtom(questionCountAtom)
 
   const {
     isPending: serverConnectionPending,
@@ -37,11 +31,8 @@ const useChat = () => {
 
   const { mutate: sendMessage } = useMutation<string, ErrorType>({
     mutationKey: ['sendMessage'],
-    mutationFn: (userInput) => sendMessageToServer(threadId!, userInput!),
-    onSuccess: (data) => {
-      setAiResponse(data)
-      setQuestionCount(questionCount + 1)
-    },
+    mutationFn: (userInput) => sendMessageToServer(threadId!, userInput!, questionCount),
+    onSuccess: (data) => setAiResponse(data),
     onSettled: () => setAiResponsePendingAtom(false),
     onMutate: () => setAiResponsePendingAtom(true),
     onError: (error) => setAiResponseErrorAtom(error),

@@ -1,4 +1,5 @@
 // const BASE_URL = 'https://personal-chatbot-90zk.onrender.com'
+const QUESTION_LIMIT = 15
 const BASE_URL = 'http://127.0.0.1:8000'
 
 export const startConversation = async (): Promise<string> => {
@@ -10,7 +11,12 @@ export const startConversation = async (): Promise<string> => {
   return data.thread_id
 }
 
-export const sendMessageToServer = async (threadId: string, message: string): Promise<string> => {
+export const sendMessageToServer = async (
+  threadId: string,
+  message: string,
+  questionCount: number
+): Promise<string> => {
+  if (questionCount >= QUESTION_LIMIT) return 'You have reached the maximum number of questions.'
   const response = await fetch(`${BASE_URL}/chat`, {
     method: 'POST',
     headers: {
