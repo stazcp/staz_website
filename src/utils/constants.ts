@@ -33,3 +33,5 @@ export const suggestions = [
     text: 'Can Staz provide professional references or testimonials from previous clients or employers?',
   },
 ]
+
+export const MAX_QUERY_LENGTH = 100

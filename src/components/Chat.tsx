@@ -3,7 +3,7 @@ import { LoadingButton } from '@mui/lab'
 import { makeStyles } from '@mui/styles'
 import { useState, FormEvent } from 'react'
 import useChat from '../hooks/use-chat'
-import { isMobile } from 'utils'
+import { MAX_QUERY_LENGTH, isMobile } from 'utils'
 import SendIcon from '@mui/icons-material/Send'
 import { useWindowSize } from 'hooks'
 
@@ -51,7 +51,9 @@ function ChatComponent() {
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'row' }}>
         <Input
           value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
+          onChange={(e) => {
+            if (e.target.value.length <= MAX_QUERY_LENGTH) setUserInput(e.target.value)
+          }}
           placeholder={renderPlaceholder()}
           style={{ width: '100%', paddingLeft: 4 }}
           className={classes.input}
@@ -61,7 +63,6 @@ function ChatComponent() {
           variant="contained"
           style={{ backgroundColor: 'rgb(0,0,0,0.7)', width: '10vw' }}
           loading={aiResponsePending}
-          // loadingPosition="start"
           className={classes.button}
           type="submit"
           color="primary"
