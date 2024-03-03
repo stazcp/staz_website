@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import { cleanHTML, createMarkup, INTRO_TEXT, isMobile } from 'utils'
+import { cleanHTML, createMarkup, INTRO_TEXT } from 'utils'
 import useChat from '../hooks/use-chat'
 import { useWindowSize } from 'hooks'
 
@@ -14,7 +14,7 @@ import { useWindowSize } from 'hooks'
 
 const TextOutput = () => {
   const { aiResponse, serverConnectionError, aiResponseError, aiResponsePending } = useChat()
-  const { width, height } = useWindowSize()
+  const { height } = useWindowSize()
 
   const strategies = [
     { condition: () => aiResponsePending, action: () => 'Loading...' },

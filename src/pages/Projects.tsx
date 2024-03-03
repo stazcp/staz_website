@@ -1,6 +1,5 @@
 import { Container, Grid } from '@mui/material'
 import ProjectCard from '../components/ProjectCard'
-import LearnMoreModal from '../components/LearnMoreModal'
 
 export default function Projects() {
   const CARD_SIZE = 4

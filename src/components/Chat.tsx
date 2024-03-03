@@ -31,7 +31,7 @@ function ChatComponent() {
 
   const classes = useStyles()
 
-  const formDisabled = serverConnectionPending || !!serverConnectionError
+  const formDisabled = serverConnectionPending || !!serverConnectionError || aiResponsePending
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()

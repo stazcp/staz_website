@@ -7,6 +7,7 @@ import {
   aiResponseWithCountAtom,
 } from '@store/chat-state'
 import { keepServerAwake, startConversation, sendMessageToServer, ErrorType } from 'utils'
+import { Chat } from './types'
 
 const useChat = () => {
   const [aiResponse, setAiResponse] = useAtom(aiResponseWithCountAtom)
@@ -29,14 +30,20 @@ const useChat = () => {
     refetchInterval: 49000,
   })
 
-  const { mutate: sendMessage } = useMutation<string, ErrorType>({
+  const { mutate: _sendMessage } = useMutation<Chat['Response'], Chat['Error'], Chat['Response']>({
     mutationKey: ['sendMessage'],
-    mutationFn: (userInput) => sendMessageToServer(threadId!, userInput!, questionCount),
+    mutationFn: (userInput: string) => sendMessageToServer(threadId!, userInput!, questionCount),
     onSuccess: (data) => setAiResponse(data),
     onSettled: () => setAiResponsePendingAtom(false),
     onMutate: () => setAiResponsePendingAtom(true),
     onError: (error) => setAiResponseErrorAtom(error),
   })
+
+  const sendMessage = (message: string) => {
+    const chatDisabled = serverConnectionPending || !!serverConnectionError || aiResponsePending
+    if (chatDisabled) return
+    _sendMessage(message)
+  }
 
   return {
     serverConnectionPending,
