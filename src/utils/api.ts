@@ -1,5 +1,5 @@
 const QUESTION_LIMIT = 15
-const BASE_URL = process.env.VITE_APP_BASE_URL
+const BASE_URL = process.env.VITE_APP_BASE_URL || 'https://personal-chatbot-90zk.onrender.com'
 
 export const startConversation = async (): Promise<string> => {
   const response = await fetch(`${BASE_URL}/start`)
