@@ -6,7 +6,7 @@ import {
   questionCountAtom,
   aiResponseWithCountAtom,
 } from '@store/chat-state'
-import { keepServerAwake, startConversation, sendMessageToServer, ErrorType } from 'utils'
+import { keepServerAwake, startConversation, sendMessageToServer } from 'utils'
 import { Chat } from './types'
 
 const useChat = () => {
