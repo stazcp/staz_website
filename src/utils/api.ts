@@ -1,6 +1,5 @@
-// const BASE_URL = 'https://personal-chatbot-90zk.onrender.com'
 const QUESTION_LIMIT = 15
-const BASE_URL = 'http://127.0.0.1:8000'
+const BASE_URL = process.env.BASE_URL
 
 export const startConversation = async (): Promise<string> => {
   const response = await fetch(`${BASE_URL}/start`)
