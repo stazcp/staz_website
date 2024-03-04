@@ -16,7 +16,6 @@ export default function Home() {
         maxHeight: '100vh',
         boxSizing: 'border-box',
         padding: 2,
-        marginTop: 2,
         alignItems: 'center',
       }}
     >
@@ -28,6 +27,7 @@ export default function Home() {
         flexDirection={'column'}
         marginBottom={isMobile(width) ? 1 : 4}
         alignItems={'center'}
+        marginTop={2}
       >
         <Suggestions />
         <Chat />
