@@ -1,6 +1,5 @@
 import { Box, Container } from '@mui/material'
 import { Chat, Suggestions, TextOutput } from 'components'
-import useWindowSize from 'hooks/user-window-resize'
 
 export default function Home() {
   return (
