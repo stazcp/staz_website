@@ -20,15 +20,8 @@ export default function Home() {
       }}
     >
       <TextOutput />
-      <Box
-        height={'100%'}
-        width={isMobile(width) ? '95vw' : '90vw'}
-        display={'flex'}
-        flexDirection={'column'}
-        marginBottom={isMobile(width) ? 1 : 4}
-        alignItems={'center'}
-        marginTop={2}
-      >
+      <div style={{ flexGrow: 1 }} />
+      <Box marginTop={2}>
         <Suggestions />
         <Chat />
       </Box>

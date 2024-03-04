@@ -6,7 +6,11 @@ import {
   questionCountAtom,
   aiResponseWithCountAtom,
 } from '@store/chat-state'
-import { keepServerAwake, startConversation, sendMessageToServer } from 'utils'
+import {
+  // keepServerAwake,
+  startConversation,
+  sendMessageToServer,
+} from 'utils'
 import { Chat } from './types'
 
 const useChat = () => {
@@ -24,11 +28,11 @@ const useChat = () => {
     queryFn: startConversation,
   })
 
-  useQuery({
-    queryKey: ['keepServerAwake'],
-    queryFn: keepServerAwake,
-    refetchInterval: 49000,
-  })
+  // useQuery({
+  //   queryKey: ['keepServerAwake'],
+  //   queryFn: keepServerAwake,
+  //   refetchInterval: 49000,
+  // })
 
   const { mutate: _sendMessage } = useMutation<Chat['Response'], Chat['Error'], Chat['Response']>({
     mutationKey: ['sendMessage'],
