@@ -25,7 +25,8 @@ const Suggestion = ({ suggestion }: SuggestionProps) => {
       sx={{ cursor: 'pointer' }}
       height={isMobile(width) ? 120 : 50}
       padding={2}
-      width={isMobile(width) ? '60vw' : '70vw'}
+      width={width - 200}
+      flexGrow={1}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >
       <div style={{ maxHeight: '100%', overflow: 'auto' }}>

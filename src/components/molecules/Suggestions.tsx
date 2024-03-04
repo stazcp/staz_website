@@ -30,6 +30,7 @@ const Suggestions = () => {
       display={'flex'}
       height={isMobile(width) ? 120 : 77}
       alignItems={'center'}
+      width={'100%'}
     >
       <KeyboardArrowLeftIcon onClick={handleLeftArrow} style={arrowStyles} />
       <SuggestionBox suggestion={suggestions[currentIndex].text} />
