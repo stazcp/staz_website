@@ -13,6 +13,7 @@ export default function Home() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         minHeight: '100vh',
+        maxHeight: '100vh',
         boxSizing: 'border-box',
         padding: 2,
         marginTop: 2,
@@ -21,11 +22,11 @@ export default function Home() {
     >
       <TextOutput />
       <Box
-        height={isMobile(width) ? 200 : 150}
+        height={'100%'}
         width={isMobile(width) ? '95vw' : '90vw'}
         display={'flex'}
         flexDirection={'column'}
-        marginBottom={4}
+        marginBottom={isMobile(width) ? 1 : 4}
         alignItems={'center'}
       >
         <Suggestions />
