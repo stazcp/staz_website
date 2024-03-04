@@ -1,7 +1,10 @@
 import { Box, Container } from '@mui/material'
 import { Chat, Suggestions, TextOutput } from 'components'
+import { useWindowSize } from 'hooks'
 
 export default function Home() {
+  const { height } = useWindowSize()
+
   return (
     <Container
       sx={{
@@ -11,7 +14,7 @@ export default function Home() {
         boxSizing: 'border-box',
         padding: 2,
         alignItems: 'center',
-        height: '100vh',
+        height,
       }}
     >
       <TextOutput />
