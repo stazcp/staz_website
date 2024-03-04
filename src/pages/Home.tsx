@@ -3,7 +3,7 @@ import { Chat, Suggestions, TextOutput } from 'components'
 import { useWindowSize } from 'hooks'
 
 export default function Home() {
-  const { height } = useWindowSize()
+  const { height, width } = useWindowSize()
 
   return (
     <Container
@@ -15,6 +15,7 @@ export default function Home() {
         padding: 2,
         alignItems: 'center',
         height,
+        width,
       }}
     >
       <TextOutput />

@@ -21,8 +21,6 @@ const Suggestion = ({ suggestion }: SuggestionProps) => {
       display={'flex'}
       justifyContent={'center'}
       marginBottom={2}
-      marginLeft={2}
-      marginRight={2}
       alignItems={'center'}
       sx={{ cursor: 'pointer' }}
       height={isMobile(width) ? 120 : 50}
