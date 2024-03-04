@@ -8,11 +8,10 @@ export default function Home() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        minHeight: '100vh',
-        maxHeight: '100vh',
         boxSizing: 'border-box',
         padding: 2,
         alignItems: 'center',
+        height: '100vh',
       }}
     >
       <TextOutput />

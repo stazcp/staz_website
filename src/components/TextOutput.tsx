@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { cleanHTML, createMarkup, INTRO_TEXT } from 'utils'
 import useChat from '../hooks/use-chat'
-import { useWindowSize } from 'hooks'
 
 // make the whole page a chat-bot interface,
 // instead of chat bot in bottom corner
@@ -14,7 +13,6 @@ import { useWindowSize } from 'hooks'
 
 const TextOutput = () => {
   const { aiResponse, serverConnectionError, aiResponseError, aiResponsePending } = useChat()
-  const { height } = useWindowSize()
 
   const strategies = [
     { condition: () => aiResponsePending, action: () => 'Loading...' },
@@ -36,13 +34,11 @@ const TextOutput = () => {
     return strategy ? createMarkup(strategy.action() || '') : { __html: '' }
   }
 
-  const tooShort = height < 700
-
   return (
     <Box
       padding={4}
       marginBottom={2}
-      maxHeight={tooShort ? '50vh' : '60vh'}
+      flexGrow={1}
       sx={{ backgroundColor: 'rgba(0, 0, 0, 0.75)', overflow: 'scroll' }}
     >
       <Typography variant="h6" component="div">
