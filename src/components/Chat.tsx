@@ -1,26 +1,10 @@
 import { Box, Input } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { makeStyles } from '@mui/styles'
 import { useState, FormEvent } from 'react'
 import useChat from '../hooks/use-chat'
 import { MAX_QUERY_LENGTH, isMobile } from 'utils'
 import SendIcon from '@mui/icons-material/Send'
 import { useWindowSize } from 'hooks'
-
-const useStyles = makeStyles({
-  button: {
-    backgroundColor: 'rgb(0,0,0,0.7)',
-    '& .MuiCircularProgress-svg': {
-      color: '#ffffff', // Change this to the color you want for the spinner
-    },
-  },
-  input: {
-    backgroundColor: 'white',
-    '&.MuiInput-underline:before': {
-      borderBottomColor: '#ffffff', // Change this to the color you want for the underline
-    },
-  },
-})
 
 function ChatComponent() {
   const [userInput, setUserInput] = useState('')
@@ -28,8 +12,6 @@ function ChatComponent() {
 
   const { serverConnectionPending, serverConnectionError, sendMessage, aiResponsePending } =
     useChat()
-
-  const classes = useStyles()
 
   const formDisabled = serverConnectionPending || !!serverConnectionError || aiResponsePending
 
@@ -47,7 +29,7 @@ function ChatComponent() {
   }
 
   return (
-    <Box width={'100%'} marginTop={3}>
+    <Box width={'100%'} marginTop={3} id="TEST_chat">
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'row' }}>
         <Input
           value={userInput}
@@ -55,18 +37,29 @@ function ChatComponent() {
             if (e.target.value.length <= MAX_QUERY_LENGTH) setUserInput(e.target.value)
           }}
           placeholder={renderPlaceholder()}
-          style={{ width: '100%', paddingLeft: 4 }}
-          className={classes.input}
           disabled={formDisabled}
+          sx={{
+            backgroundColor: 'white',
+            '&.MuiInput-underline:before': {
+              borderBottomColor: '#ffffff',
+            },
+            width: '100%',
+            paddingLeft: 4,
+          }}
         />
         <LoadingButton
           variant="contained"
           style={{ backgroundColor: 'rgb(0,0,0,0.7)', width: '10vw' }}
           loading={aiResponsePending || serverConnectionPending}
-          className={classes.button}
           type="submit"
           color="primary"
           disabled={formDisabled}
+          sx={{
+            backgroundColor: 'rgb(0,0,0,0.7)',
+            '& .MuiCircularProgress-svg': {
+              color: '#ffffff',
+            },
+          }}
         >
           {isMobile(width) ? <SendIcon /> : <span>Send</span>}
         </LoadingButton>
