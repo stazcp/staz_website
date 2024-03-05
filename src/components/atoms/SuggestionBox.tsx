@@ -25,7 +25,7 @@ const Suggestion = ({ suggestion }: SuggestionProps) => {
       sx={{ cursor: 'pointer' }}
       height={isMobile(width) ? 120 : 50}
       padding={2}
-      width={width - 200}
+      width={'100%'}
       flexGrow={1}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >

@@ -20,7 +20,7 @@ export default function Home() {
     >
       <TextOutput />
       <div style={{ flexGrow: 1 }} />
-      <Box marginTop={2}>
+      <Box marginTop={2} width={'100%'}>
         <Suggestions />
         <Chat />
       </Box>
