@@ -3,7 +3,9 @@ export const INTRO_TEXT = `
   My name is Staz.<br>
   I am a Frontend (mostly) engineer and have been working with React and Typescript mainly.<br><br>
   I like to build things with AI, like this page for example uses GPT to generate the background image, as well as to power the chat bot where you can ask me questions about my work, hobbies, or anything else.</p>
-  <p>Give it it a try.</p>
+  <p>Give it it a try below.</p>
+  <hr><br>
+  <small>Please keep in mind that that the AI might make mistakes, also the server might take a minute to start if the app has been inactive for a while.</small>
 `
 
 export const suggestions = [
