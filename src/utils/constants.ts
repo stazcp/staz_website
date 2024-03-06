@@ -19,7 +19,7 @@ export const suggestions = [
   { id: 8, text: "What is Staz's preferred working style – as a team member or independently?" },
   {
     id: 9,
-    text: 'What are some of the major achievements or accolades Staz has received throughout his career?',
+    text: 'What are some of the major achievements Staz has received throughout his career?',
   },
   { id: 10, text: 'Is Staz open to relocation or remote work for a suitable position?' },
   {
